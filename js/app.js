@@ -4,11 +4,16 @@ const card = document.querySelectorAll('.card');
 const show = document.querySelectorAll('.show');
 const deck = document.querySelector('.deck');
 const moves = document.querySelector('.moves');
+const stars = document.querySelectorAll(".stars .fa")
+const great = stars[2];
+const good = stars[1];
+const okay = stars[0];
 
 let count = 0;
 let firstCard;
 let firstFace;
-
+let movesCount = 0;
+let wrongMoves = 0;
 
 /*
  * Create a list that holds all of your cards
@@ -25,14 +30,14 @@ cards=["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube",
  *   - add each card's HTML to the page
  */
  // Game start
-newCards();
 init();
-touch.addEventListener("click",newCards);
-
+touch.addEventListener("click",init);
 // initial
 
 function init() {
-  moves.textContent = 0
+  //shuffle the cards and prepare the game
+  newCards();
+  //prepare the cards for game and able to flip
   for (let i = 0; i < card.length; i++) {
         card[i].classList.remove("open", "show", "match", "incorrect");
         card[i].addEventListener("click", flipCard);
@@ -43,7 +48,9 @@ function init() {
 
 
 function flipCard(event) {
+  // first open
   event.target.classList.add("open", "show");
+
   if (count === 0){
      firstCard = event.target
      firstFace = event.target.firstElementChild.classList[1];
@@ -54,6 +61,9 @@ function flipCard(event) {
   }
   count ++
   if (count === 2) {
+    //Count the moves
+    movesCount++
+    moves.textContent = movesCount;
     if (firstFace != secondFace) {
       wrongChoise(event.target,firstCard);
     }else {
@@ -73,8 +83,23 @@ function wrongChoise(first, second) {
   setTimeout(function() {
     second.classList.remove("show", "incorrect");
     first.classList.remove("show", "incorrect");
-  }, 800);
+  }, 500);
   firstCard.addEventListener("click", flipCard);
+
+  //Calculate how good play the game the player
+  wrongMoves++
+  if (wrongMoves > 8  && wrongMoves < 17){
+    great.classList.remove("fa-star");
+    great.classList.add("fa-star-o");
+  }
+  if (wrongMoves > 16 && wrongMoves <25) {
+    good.classList.remove("fa-star");
+    good.classList.add("fa-star-o");
+  }
+  if (wrongMoves > 24) {
+    okay.classList.remove("fa-star");
+    okay.classList.add("fa-star-o");
+  }
 }
 
 function rightChoise(first, second) {
@@ -108,12 +133,19 @@ function shuffle(array) {
 
 function newCards() {
   shuffle(cards);
-  for (var i = 0; i < list.length; i++) {
+  for (let i = 0; i < list.length; i++) {
     card[i].classList.remove("open", "show", "match", "incorrect")
     list[i].classList.remove(list[i].classList[1]);
     list[i].classList.add(cards[i]);
-
   }
+  for (let i = 0; i < stars.length; i++) {
+    stars[i].classList.remove("fa-star-o");
+    stars[i].classList.add("fa-star");
+  }
+  count = 0
+  movesCount = 0;
+  moves.textContent = 0;
+  wrongMoves = 0;
 };
 
 /*
