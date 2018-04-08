@@ -13,8 +13,10 @@ const good = stars[1];
 const okay = stars[0];
 const starScore = document.querySelector('.starScore');
 const moveScore = document.querySelector('.moveScore');
-const timer = document.querySelector('#timer');
-
+const minute = document.querySelector('.minute');
+const seconds = document.querySelector('.second');
+const resultMinute = document.querySelector('#resultMinute');
+const resultSecond = document.querySelector('#resultSecond');
 
 let count = 0;
 let firstCard;
@@ -23,7 +25,8 @@ let movesCount = 0;
 let wrongMoves = 0;
 let gameCount =0;
 let starNumber = 3;
-
+let totalSecond = 0;
+var clock;
 /*
  * Create a list that holds all of your cards
  */
@@ -46,9 +49,12 @@ button.addEventListener("click",function() {
   main.style.display = "flex";
   init();
 });
+
 // initial
 
 function init() {
+  clearInterval(clock);
+  clock = setInterval(changeTimer,1000);
   final.style.display = "none";
   //shuffle the cards and prepare the game
   newCards();
@@ -125,11 +131,14 @@ function rightChoise(first, second) {
   count = 0;
   gameCount++
   if (gameCount === 8) {
+    clearInterval(clock);
     document.body.style.backgroundImage = "none";
     main.style.display = "none";
     final.style.display = "flex";
     starScore.textContent = starNumber;
     moveScore.textContent = movesCount;
+    resultSecond.innerHTML = seconds.innerHTML;
+    resultMinute.innerHTML = minute.innerHTML;
   }
 };
 
@@ -168,8 +177,25 @@ function newCards() {
   moves.textContent = 0;
   wrongMoves = 0;
   gameCount=0;
+  minute.innerHTML = "00";
+  seconds.innerHTML = "00";
+  totalSecond =0;
 };
 
+function changeTimer() {
+  totalSecond++;
+  seconds.innerHTML = calc(totalSecond%60);
+  minute.innerHTML = calc(parseInt(totalSecond / 60));
+};
+
+function calc(val) {
+  let valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+};
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

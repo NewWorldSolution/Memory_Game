@@ -13,7 +13,7 @@
     <div class="container">
         <header>
             <h1 class="header">Matching Game</h1>
-            <input class="header" id="timer" type="time" name="" value="00:00:00" step ="2">
+            <p class="header" id="timer">Timer: <span class="minute">00</span>:<span class="second">00</span></p>
         </header>
 
 
@@ -86,10 +86,10 @@
     </div>
     <div class="winning">
         <i class="fa fa-check-circle-o"></i>
-        <h1>Congratulations You Won!</h1>
+        <h1>Congratulations You Won Just In <span id="resultMinute">00</span> Minute And <span id="resultSecond">00</span> Seconds!</h1>
         <p>With <span class="moveScore">17</span> Moves and <span class="starScore">1</span> Stars.</p>
         <p>Wohooo!</p>
-        <button type="button" name="button">Play again!</button>
+        <button type="button" name="button">Play Again?</button>
     </div>
 
     <script src="js/app.js"></script>
