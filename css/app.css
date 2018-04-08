@@ -27,11 +27,30 @@ body {
     align-items: center;
     flex-direction: column;
 }
-
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+.winning{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10%;
 }
+.winning i{
+  font-size: 5em;
+  color: green;
+}
+.winning p{
+  margin: 0;
+}
+button{
+  margin: 20px 0;
+  width: 150px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  background-color: #37a88c;
+  color: #FFF
+}
+
 
 /*
  * Styles for the deck of cards
@@ -66,40 +85,49 @@ h1 {
 }
 
 .deck .card.open {
-    transform: rotateY(0);
+    transform: rotateY(180deg);
     background: #02b3e4;
     cursor: default;
+    transition: 0.25s;
+    /* transform-style: preserve-3d;
+    position: relative; */
 }
+
 
 .deck .card.show {
     font-size: 33px;
 }
 
 .deck .card.match {
+    transform: rotateY(180deg);
     cursor: default;
     background: #02ccba;
     font-size: 33px;
 }
 
 .deck .card.incorrect{
+  transform: rotateY(180deg);
   background: #ed8147;
 }
-
+.deck .card .fa{
+  transform: rotateY(180deg);
+}
 /*
  * Styles for the Score Panel
  */
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 450px;
     margin-bottom: 10px;
 }
 
 .score-panel .stars {
     margin: 0;
-    padding: 0;
+    padding: 20px 0 0 0;
     display: inline-block;
     margin: 0 5px 0 0;
+
 }
 
 .score-panel .stars li {
@@ -110,4 +138,23 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+.restart{
+  padding: 1.2em;
+}
+header{
+  width: 400px;
+  text-align: left;
+}
+header #timer{
+  font-size: 1.4em;
+  display: inline;
+  margin-top: 25px;
+  text-align: right;
+  float: right;
+  border-width: thick;
+
+}
+.header{
+float: left;
 }

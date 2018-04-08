@@ -4,16 +4,25 @@ const card = document.querySelectorAll('.card');
 const show = document.querySelectorAll('.show');
 const deck = document.querySelector('.deck');
 const moves = document.querySelector('.moves');
-const stars = document.querySelectorAll(".stars .fa")
+const stars = document.querySelectorAll(".stars .fa");
+const main = document.querySelector('.container');
+const final = document.querySelector('.winning');
+const button = document.querySelector('.winning button');
 const great = stars[2];
 const good = stars[1];
 const okay = stars[0];
+const starScore = document.querySelector('.starScore');
+const moveScore = document.querySelector('.moveScore');
+const timer = document.querySelector('#timer');
+
 
 let count = 0;
 let firstCard;
 let firstFace;
 let movesCount = 0;
 let wrongMoves = 0;
+let gameCount =0;
+let starNumber = 3;
 
 /*
  * Create a list that holds all of your cards
@@ -32,9 +41,15 @@ cards=["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube",
  // Game start
 init();
 touch.addEventListener("click",init);
+button.addEventListener("click",function() {
+  final.style.display = "none";
+  main.style.display = "flex";
+  init();
+});
 // initial
 
 function init() {
+  final.style.display = "none";
   //shuffle the cards and prepare the game
   newCards();
   //prepare the cards for game and able to flip
@@ -88,17 +103,15 @@ function wrongChoise(first, second) {
 
   //Calculate how good play the game the player
   wrongMoves++
-  if (wrongMoves > 8  && wrongMoves < 17){
+  if (wrongMoves > 9  && wrongMoves < 16){
     great.classList.remove("fa-star");
     great.classList.add("fa-star-o");
+    starNumber = 2;
   }
-  if (wrongMoves > 16 && wrongMoves <25) {
+  if (wrongMoves > 15 ){
     good.classList.remove("fa-star");
     good.classList.add("fa-star-o");
-  }
-  if (wrongMoves > 24) {
-    okay.classList.remove("fa-star");
-    okay.classList.add("fa-star-o");
+    starNumber = 1;
   }
 }
 
@@ -110,7 +123,15 @@ function rightChoise(first, second) {
   first.removeEventListener ("click", flipCard);
   second.removeEventListener ("click", flipCard);
   count = 0;
-}
+  gameCount++
+  if (gameCount === 8) {
+    document.body.style.backgroundImage = "none";
+    main.style.display = "none";
+    final.style.display = "flex";
+    starScore.textContent = starNumber;
+    moveScore.textContent = movesCount;
+  }
+};
 
 
 
@@ -128,7 +149,7 @@ function shuffle(array) {
     }
 
     return array;
-}
+};
 
 
 function newCards() {
@@ -146,6 +167,7 @@ function newCards() {
   movesCount = 0;
   moves.textContent = 0;
   wrongMoves = 0;
+  gameCount=0;
 };
 
 /*
