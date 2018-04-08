@@ -35,12 +35,6 @@ cards=["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube",
         "fa-anchor", "fa-bolt", "fa-cube","fa-leaf", "fa-bicycle", "fa-bomb"];
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
  // Game start
 init();
 touch.addEventListener("click",init);
@@ -53,7 +47,9 @@ button.addEventListener("click",function() {
 // initial
 
 function init() {
+  //to avoid double timer
   clearInterval(clock);
+  //activeta timer
   clock = setInterval(changeTimer,1000);
   final.style.display = "none";
   //shuffle the cards and prepare the game
@@ -71,16 +67,18 @@ function init() {
 function flipCard(event) {
   // first open
   event.target.classList.add("open", "show");
-
+  // Check the cards
   if (count === 0){
      firstCard = event.target
      firstFace = event.target.firstElementChild.classList[1];
+     //avoid to click already selected card
      event.target.removeEventListener ("click", flipCard);
   }
   else if (count === 1){
     secondFace = event.target.firstElementChild.classList[1];
   }
   count ++
+  // 2 cards selected
   if (count === 2) {
     //Count the moves
     movesCount++
@@ -94,13 +92,15 @@ function flipCard(event) {
 }
 
 
-
+//If the cards are different
 function wrongChoise(first, second) {
   second.classList.remove("open");
   first.classList.remove("open");
   second.classList.add("incorrect");
   first.classList.add("incorrect");
+  //reset the selected card
   count = 0;
+  // to show the both wrong cards
   setTimeout(function() {
     second.classList.remove("show", "incorrect");
     first.classList.remove("show", "incorrect");
@@ -109,32 +109,38 @@ function wrongChoise(first, second) {
 
   //Calculate how good play the game the player
   wrongMoves++
-  if (wrongMoves > 9  && wrongMoves < 16){
+  if (wrongMoves > 5  && wrongMoves < 14){
     great.classList.remove("fa-star");
     great.classList.add("fa-star-o");
     starNumber = 2;
   }
-  if (wrongMoves > 15 ){
+  if (wrongMoves > 13 ){
     good.classList.remove("fa-star");
     good.classList.add("fa-star-o");
     starNumber = 1;
   }
 }
-
+//If the selected cards match
 function rightChoise(first, second) {
   second.classList.remove("open" ,"show");
   first.classList.remove("open", "show");
   second.classList.add("match");
   first.classList.add("match");
+  //disbale to click already matched cards
   first.removeEventListener ("click", flipCard);
   second.removeEventListener ("click", flipCard);
+  //reset the selected card
   count = 0;
+  //count how many pair is matched
   gameCount++
   if (gameCount === 8) {
+    //stop the timer
     clearInterval(clock);
+    //show the results
     document.body.style.backgroundImage = "none";
     main.style.display = "none";
     final.style.display = "flex";
+    //show the scores
     starScore.textContent = starNumber;
     moveScore.textContent = movesCount;
     resultSecond.innerHTML = seconds.innerHTML;
@@ -161,6 +167,7 @@ function shuffle(array) {
 };
 
 
+//Create a new game condition reset everything
 function newCards() {
   shuffle(cards);
   for (let i = 0; i < list.length; i++) {
@@ -181,7 +188,7 @@ function newCards() {
   seconds.innerHTML = "00";
   totalSecond =0;
 };
-
+//Timer mechanisim
 function changeTimer() {
   totalSecond++;
   seconds.innerHTML = calc(totalSecond%60);
