@@ -2,11 +2,14 @@ const list = document.querySelectorAll(".deck .fa");
 const touch = document.querySelector('.restart');
 const card = document.querySelectorAll('.card');
 const show = document.querySelectorAll('.show');
-const deck = document.querySelector('.deck')
+const deck = document.querySelector('.deck');
+const moves = document.querySelector('.moves');
 
-let count = 0
-let firstCard
-let firstFace
+let count = 0;
+let firstCard;
+let firstFace;
+
+
 /*
  * Create a list that holds all of your cards
  */
@@ -29,33 +32,32 @@ touch.addEventListener("click",newCards);
 // initial
 
 function init() {
+  moves.textContent = 0
   for (let i = 0; i < card.length; i++) {
         card[i].classList.remove("open", "show", "match", "incorrect");
-        card[i].addEventListener("click", function(event){
-            event.preventDefault();
-            flipCard(card , i);
-        });
+        card[i].addEventListener("click", flipCard);
   }
 };
 
 
 
 
-function flipCard(array , index) {
-  array[index].classList.add("open", "show");
+function flipCard(event) {
+  event.target.classList.add("open", "show");
   if (count === 0){
-     firstCard = index;
-     firstFace = array[index].firstElementChild.classList[1];
+     firstCard = event.target
+     firstFace = event.target.firstElementChild.classList[1];
+     event.target.removeEventListener ("click", flipCard);
   }
-  if (count === 1){
-    secondFace = array[index].firstElementChild.classList[1];
+  else if (count === 1){
+    secondFace = event.target.firstElementChild.classList[1];
   }
   count ++
   if (count === 2) {
     if (firstFace != secondFace) {
-      wrongChoise(array[index],array[firstCard]);
+      wrongChoise(event.target,firstCard);
     }else {
-      rightChoise(array[index],array[firstCard]);
+      rightChoise(event.target,firstCard);
     }
   }
 }
@@ -72,6 +74,7 @@ function wrongChoise(first, second) {
     second.classList.remove("show", "incorrect");
     first.classList.remove("show", "incorrect");
   }, 800);
+  firstCard.addEventListener("click", flipCard);
 }
 
 function rightChoise(first, second) {
@@ -79,8 +82,8 @@ function rightChoise(first, second) {
   first.classList.remove("open", "show");
   second.classList.add("match");
   first.classList.add("match");
-  first.outerHTML = first.outerHTML;
-  second.outerHTML = second.outerHTML;
+  first.removeEventListener ("click", flipCard);
+  second.removeEventListener ("click", flipCard);
   count = 0;
 }
 
@@ -106,9 +109,10 @@ function shuffle(array) {
 function newCards() {
   shuffle(cards);
   for (var i = 0; i < list.length; i++) {
+    card[i].classList.remove("open", "show", "match", "incorrect")
     list[i].classList.remove(list[i].classList[1]);
     list[i].classList.add(cards[i]);
-    card[i].classList.remove("open", "show", "match", "incorrect")
+
   }
 };
 
