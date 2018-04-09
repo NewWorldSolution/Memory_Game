@@ -35,9 +35,11 @@ cards=["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube",
         "fa-anchor", "fa-bolt", "fa-cube","fa-leaf", "fa-bicycle", "fa-bomb"];
 
 
- // Game start
+ // Game start when the page open
 init();
+// restart the game while playing
 touch.addEventListener("click",init);
+// restart the game after finishing the game
 button.addEventListener("click",function() {
   final.style.display = "none";
   main.style.display = "flex";
@@ -143,6 +145,7 @@ function rightChoise(first, second) {
     //show the scores
     starScore.textContent = starNumber;
     moveScore.textContent = movesCount;
+    //show the game time
     resultSecond.innerHTML = seconds.innerHTML;
     resultMinute.innerHTML = minute.innerHTML;
   }
@@ -179,11 +182,16 @@ function newCards() {
     stars[i].classList.remove("fa-star-o");
     stars[i].classList.add("fa-star");
   }
-  count = 0
+
+  count = 0 //reset the fliped card
+  // reset the number of movement
   movesCount = 0;
   moves.textContent = 0;
+  // reset the wrong number for stars
   wrongMoves = 0;
+  //reset number matched card
   gameCount=0;
+  //reset the timer
   minute.innerHTML = "00";
   seconds.innerHTML = "00";
   totalSecond =0;
