@@ -12,7 +12,7 @@ Welcome to the Memory Card Game. The game goal is basically matched all pair of 
 
 ## Install
 
-You need to download from Github repository and open index.html file.
+You need to download the Github repository and open index.html file.
 
 Enough reading let have some fun. If you want play with yourself or with friend and see who will finish with less time and movement!!! :).   
 
