@@ -4,16 +4,17 @@ Welcome to the Concentration. This is a card game in which all of the cards are 
 
 ## Table of Contents
 
-* [Prerequisites](#Prerequisites)
+* [Dependencies](#Dependencies)
 * [Installing](#Installing)
 * [Contributing](#contributing)
 * [Authors](#Authors)
 * [License](#License)
 
 
-## Prerequisites
+## Dependencies
 
-you need to have a web browser such as W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+.
+- FontAwesome(bootstrap)
+- Google fonts
 
 
 ## Installing
