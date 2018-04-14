@@ -13,12 +13,12 @@ Welcome to the Concentration. This is a card game in which all of the cards are 
 
 ## Prerequisites
 
-What things you need to have is a web browser such as W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+.
+you need to have a web browser such as W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+.
 
 
 ## Installing
 
-You need to download the repository. Unzip the project in a folder and open the `index.html` file.
+You need to download as ZIP the repository, then unzip the project in a folder and open the `index.html` file.
 
 
 ## Contributing
