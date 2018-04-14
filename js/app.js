@@ -1,36 +1,34 @@
-const list = document.querySelectorAll(".deck .fa");
-const touch = document.querySelector('.restart');
-const card = document.querySelectorAll('.card');
-const show = document.querySelectorAll('.show');
-const deck = document.querySelector('.deck');
-const moves = document.querySelector('.moves');
-const stars = document.querySelectorAll(".stars .fa");
-const main = document.querySelector('.container');
-const final = document.querySelector('.winning');
-const button = document.querySelector('.winning button');
-const great = stars[2];
-const good = stars[1];
-const okay = stars[0];
-const starScore = document.querySelector('.starScore');
-const moveScore = document.querySelector('.moveScore');
-const minute = document.querySelector('.minute');
-const seconds = document.querySelector('.second');
-const resultMinute = document.querySelector('#resultMinute');
-const resultSecond = document.querySelector('#resultSecond');
+var list = document.querySelectorAll(".deck .fa");
+var touch = document.querySelector('.restart');
+var card = document.querySelectorAll('.card');
+var moves = document.querySelector('.moves');
+var stars = document.querySelectorAll(".stars .fa");
+var main = document.querySelector('.container');
+var final = document.querySelector('.winning');
+var button = document.querySelector('.winning button');
+var great = stars[2];
+var good = stars[1];
+var starScore = document.querySelector('.starScore');
+var moveScore = document.querySelector('.moveScore');
+var minute = document.querySelector('.minute');
+var seconds = document.querySelector('.second');
+var resultMinute = document.querySelector('#resultMinute');
+var resultSecond = document.querySelector('#resultSecond');
 
-let count = 0;
-let firstCard;
-let firstFace;
-let movesCount = 0;
-let wrongMoves = 0;
-let gameCount =0;
-let starNumber = 3;
-let totalSecond = 0;
+var count = 0;
+var firstCard;
+var firstFace;
+var secondFace;
+var movesCount = 0;
+var wrongMoves = 0;
+var gameCount =0;
+var starNumber = 3;
+var totalSecond = 0;
 var clock;
 /*
  * Create a list that holds all of your cards
  */
-cards=["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube",
+var cards=["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube",
         "fa-leaf", "fa-bicycle", "fa-bomb", "fa-diamond", "fa-paper-plane-o",
         "fa-anchor", "fa-bolt", "fa-cube","fa-leaf", "fa-bicycle", "fa-bomb"];
 
@@ -57,11 +55,11 @@ function init() {
   //shuffle the cards and prepare the game
   newCards();
   //prepare the cards for game and able to flip
-  for (let i = 0; i < card.length; i++) {
+  for (var i = 0; i < card.length; i++) {
         card[i].classList.remove("open", "show", "match", "incorrect");
         card[i].addEventListener("click", flipCard);
   }
-};
+}
 
 
 
@@ -71,7 +69,7 @@ function flipCard(event) {
   event.target.classList.add("open", "show");
   // Check the cards
   if (count === 0){
-     firstCard = event.target
+     firstCard = event.target;
      firstFace = event.target.firstElementChild.classList[1];
      //avoid to click already selected card
      event.target.removeEventListener ("click", flipCard);
@@ -79,11 +77,11 @@ function flipCard(event) {
   else if (count === 1){
     secondFace = event.target.firstElementChild.classList[1];
   }
-  count ++
+  count ++;
   // 2 cards selected
   if (count === 2) {
     //Count the moves
-    movesCount++
+    movesCount++;
     moves.textContent = movesCount;
     if (firstFace != secondFace) {
       wrongChoise(event.target,firstCard);
@@ -110,7 +108,7 @@ function wrongChoise(first, second) {
   firstCard.addEventListener("click", flipCard);
 
   //Calculate how good play the game the player
-  wrongMoves++
+  wrongMoves++;
   if (wrongMoves > 5  && wrongMoves < 14){
     great.classList.remove("fa-star");
     great.classList.add("fa-star-o");
@@ -134,7 +132,7 @@ function rightChoise(first, second) {
   //reset the selected card
   count = 0;
   //count how many pair is matched
-  gameCount++
+  gameCount++;
   if (gameCount === 8) {
     //stop the timer
     clearInterval(clock);
@@ -149,7 +147,7 @@ function rightChoise(first, second) {
     resultSecond.innerHTML = seconds.innerHTML;
     resultMinute.innerHTML = minute.innerHTML;
   }
-};
+}
 
 
 
@@ -167,23 +165,23 @@ function shuffle(array) {
     }
 
     return array;
-};
+}
 
 
 //Create a new game condition reset everything
 function newCards() {
   shuffle(cards);
-  for (let i = 0; i < list.length; i++) {
-    card[i].classList.remove("open", "show", "match", "incorrect")
+  for (var i = 0; i < list.length; i++) {
+    card[i].classList.remove("open", "show", "match", "incorrect");
     list[i].classList.remove(list[i].classList[1]);
     list[i].classList.add(cards[i]);
   }
-  for (let i = 0; i < stars.length; i++) {
-    stars[i].classList.remove("fa-star-o");
-    stars[i].classList.add("fa-star");
+  for (var y = 0; y < stars.length; y++) {
+    stars[y].classList.remove("fa-star-o");
+    stars[y].classList.add("fa-star");
   }
 
-  count = 0 //reset the fliped card
+  count = 0 ;//reset the fliped card
   // reset the number of movement
   movesCount = 0;
   moves.textContent = 0;
@@ -195,22 +193,22 @@ function newCards() {
   minute.innerHTML = "00";
   seconds.innerHTML = "00";
   totalSecond =0;
-};
+}
 //Timer mechanisim
 function changeTimer() {
   totalSecond++;
   seconds.innerHTML = calc(totalSecond%60);
   minute.innerHTML = calc(parseInt(totalSecond / 60));
-};
+}
 
 function calc(val) {
-  let valString = val + "";
+  var valString = val + "";
   if (valString.length < 2) {
     return "0" + valString;
   } else {
     return valString;
   }
-};
+}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

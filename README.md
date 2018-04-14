@@ -14,12 +14,18 @@ Welcome to the Concentration. This is a card game in which all of the cards are 
 ## Prerequisites
 
 
+
 ## Installing
+
 
 
 ##Contributing
 
+
+
 ##Authors
+
+
 
 ##License
 
