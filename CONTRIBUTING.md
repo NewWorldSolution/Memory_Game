@@ -1,3 +1,5 @@
 # How to contribute
 
-The files in this repository are used as the starting point for all students. Because we want students to write the majority of the code themselves, pull requests (most likely) will _not_ be merged into the project.
+Please `do not contribute` to this repository! This project special for Udacity Frontend Web Developer Nanodegree Program. In case you would like to add any value please discuss the change you wish to make via issue, email, or any other method with me.
+
+Thank you for your attention!

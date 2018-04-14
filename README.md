@@ -13,22 +13,25 @@ Welcome to the Concentration. This is a card game in which all of the cards are 
 
 ## Prerequisites
 
+What things you need to have is a web browser such as W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+.
 
 
 ## Installing
 
+You need to download the repository. Unzip the project in a folder and open the `index.html` file.
 
 
-##Contributing
+## Contributing
 
+Please read [CONTRIBUTING.md](/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
+## Authors
 
-##Authors
+- **Burak Kilic**  -*initial work*
 
+## License
 
-
-##License
-
+This project is licensed under the MIT License - see the [LICENSE.md](/LICENSE.md) file for details
 
 <!-- ## Instructions
 
